@@ -1,0 +1,82 @@
+﻿@using movierecommender.Models
+@model  movierecommender.Models.Movies
+@{
+    ViewBag.Title = "Choose";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Movie Recommender</h1>
+
+<h3>Pick the movie you best liked in the past?</h3>
+@{
+    Movies movies = (Movies)ViewData["movies"];
+    var maxelements = movies.MoviesList.Count;
+    Random r = new Random();
+    int[] movieselector = new int[6];
+    Random rnd = new Random();
+    int i = 0;
+    while (i < Movies.moviestorecommend)
+    {
+        int randomselector = rnd.Next(maxelements);
+
+        if ((movies.MoviesList.ElementAt(randomselector).MovieName.Contains("20"))  ||
+            (movies.MoviesList.ElementAt(randomselector).MovieName.Contains("198")) ||
+            (movies.MoviesList.ElementAt(randomselector).MovieName.Contains("199")))
+        {
+            movieselector[i] = randomselector;
+            i++;
+        }
+    }
+}
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-block">
+                <h3 class="card-title">@movies.MoviesList.ElementAt(movieselector[0]).MovieName</h3>
+                <a href="#" OnClick="location.href='@Url.Action("Recommend", "Movies")?id=' + @movies.MoviesList.ElementAt(movieselector[1]).MovieID" class="btn btn-primary">Choose me</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-block">
+                <h3 class="card-title">@movies.MoviesList.ElementAt(movieselector[1]).MovieName</h3>
+                <a href="#" OnClick="location.href='@Url.Action("Recommend", "Movies")?id=' + @movies.MoviesList.ElementAt(movieselector[1]).MovieID" class="btn btn-primary">Choose me</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-block">
+                <h3 class="card-title">@movies.MoviesList.ElementAt(movieselector[2]).MovieName</h3>
+                <a href="#" OnClick="location.href='@Url.Action("Recommend", "Movies")?id=' + @movies.MoviesList.ElementAt(movieselector[1]).MovieID" class="btn btn-primary">Choose me</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-block">
+                <h3 class="card-title">@movies.MoviesList.ElementAt(movieselector[3]).MovieName</h3>
+                <a href="#" OnClick="location.href='@Url.Action("Recommend", "Movies")?id=' + @movies.MoviesList.ElementAt(movieselector[1]).MovieID" class="btn btn-primary">Choose me</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-block">
+                <h3 class="card-title">@movies.MoviesList.ElementAt(movieselector[4]).MovieName</h3>
+                <a href="#" OnClick="location.href='@Url.Action("Recommend", "Movies")?id=' + @movies.MoviesList.ElementAt(movieselector[1]).MovieID" class="btn btn-primary">Choose me</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-block">
+                <h3 class="card-title">@movies.MoviesList.ElementAt(movieselector[5]).MovieName</h3>
+                <a href="#" OnClick="location.href='@Url.Action("Recommend", "Movies")?id=' + @movies.MoviesList.ElementAt(movieselector[1]).MovieID" class="btn btn-primary">Choose me </a>
+            </div>
+        </div>
+    </div>
+</div>
+<hr/>
+<button type="button" OnClick="location.href='@Url.Action("Choose", "Movies")'" class="btn btn-primary btn-warning">I haven't seen any of these, let me try again!</button>

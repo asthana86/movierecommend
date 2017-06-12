@@ -1,0 +1,79 @@
+﻿@using movierecommender.Models
+
+@model  movierecommender.Models.Movies
+
+@{
+    ViewBag.Title = "Recommend";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>A few recommendations!</h1>
+@{
+    Movies movies = (Movies)ViewData["movies"];
+    int []movieselector = (int [])ViewData["movieselector"];
+    List<Movies.MovieList> movielist = movies.MoviesList;
+    var movienamelist = new List<string>();
+    string movienamestr="";
+    foreach (var item in movielist)
+    {
+        for (int i = 0; i < Movies.moviestorecommend; i++)
+        {
+            movienamestr = "" + item.MovieID + ":" + movieselector[i];
+            if (item.MovieID == movieselector[i])
+            {
+                movienamelist.Add(item.MovieName);
+            }
+        }
+    }
+}
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-block">
+                <h3 class="card-title">@movienamelist.ElementAt(0)</h3>
+                <a href="#" OnClick="location.href='@Url.Action("Watch", "Movies")'" class="btn btn-primary">Play Movie</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-block">
+                <h3 class="card-title">@movienamelist.ElementAt(1)</h3>
+                <a href="#" OnClick="location.href='@Url.Action("Watch", "Movies")'" class="btn btn-primary">Play Movie</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-block">
+                <h3 class="card-title">@movienamelist.ElementAt(2)</h3>
+                <a href="#" OnClick="location.href='@Url.Action("Watch", "Movies")'" class="btn btn-primary">Play Movie</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-block">
+                <h3 class="card-title">@movienamelist.ElementAt(3)</h3>
+                <a href="#" OnClick="location.href='@Url.Action("Watch", "Movies")'" class="btn btn-primary">Play Movie</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-block">
+                <h3 class="card-title">@movienamelist.ElementAt(4)</h3>
+                <a href="#" OnClick="location.href='@Url.Action("Watch", "Movies")'" class="btn btn-primary">Play Movie</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-block">
+                <h3 class="card-title">@movienamelist.ElementAt(5)</h3>
+                <a href="#" OnClick="location.href='@Url.Action("Watch", "Movies")'" class="btn btn-primary">Play Movie</a>
+            </div>
+        </div>
+    </div>
+</div>
